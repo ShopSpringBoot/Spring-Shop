@@ -1,33 +1,25 @@
 package com.shop.dto;
 
-import com.shop.entity.Category;
-import com.shop.entity.Product;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
+@Setter
 public class ProductDto {
-    private String productName;
-    private int price;
-    private String description;
-    private Category category;
 
-    @Builder
-    public ProductDto(String productName, int price, String description, Category category) {
-        this.productName = productName;
-        this.price = price;
-        this.description = description;
-        this.category = category;
-    }
+    private Long id;
 
-    public Product toEntity() {
-        return Product.builder()
-                .productName(productName)
-                .price(price)
-                .description(description)
-                .category(category)
-                .build();
-    }
+    private String productNm;
+
+    private Integer price;
+
+    private String productDetail;
+
+    private String sellStatCd;
+
+    private LocalDateTime regTime;
+
+    private LocalDateTime updateTime;
 }

@@ -1,50 +1,42 @@
 package com.shop.entity;
 
-import lombok.Builder;
+import com.shop.constant.ProductSellStatus;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@NoArgsConstructor
 @Entity
+@Table(name="product")
+@Getter
+@Setter
+@ToString
 public class Product {
 
     @Id
     @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id;                        //상품코드
+
+    @Column(nullable = false, length = 50)
+    private String productNm;                  //상품명
+
+    @Column(name="price", nullable = false)
+    private int price;                      //가격
 
     @Column(nullable = false)
-    private String productName;
-
-    @Column(nullable = false)
-    private int price;
+    private int stockNumber;                //재고수량
 
     @Lob
-    private String description;
+    @Column(nullable = false)
+    private String itemDetail;              //상품 상세 설명
 
-    private LocalDateTime dateAdded;
+    @Enumerated(EnumType.STRING)
+    private ProductSellStatus itemSellStatus;  //상품 판매 상태
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_id")
-    private Category category;
+    private LocalDateTime regTime;          //등록 시간
 
-    @Builder
-    public Product(String productName, int price, String description, LocalDateTime dateAdded, Category category) {
-        this.productName = productName;
-        this.price = price;
-        this.description = description;
-        this.dateAdded = LocalDateTime.now();
-        this.category = category;
-    }
-
-    public void update(String productName, int price, String description, Category category) {
-        this.productName = productName;
-        this.price = price;
-        this.description = description;
-        this.category = category;
-    }
+    private LocalDateTime updateTime;       //수정 시간
 }
