@@ -53,6 +53,7 @@
             <button type="submit" class="btn btn-primary" style="">Submit</button>
         </div>
         <!-- 사용자의 세션에 임의의 값을 저장하여 요청마다 그 값을 포함하면 전송하면 서버에서 세션에 저장된 값과 요청이 온 값이 일치하는지 확인하여 CSRF를 방어 -->
+        <!-- CSRF란 사이트 간 위조 요청으로 사용자가 자신의 의지와 상관없이 해커가 의도한 대로 수정, 등록, 삭제 등의 행위를 웹사이트를 요청하게 하는 공격-->
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </form>
 
