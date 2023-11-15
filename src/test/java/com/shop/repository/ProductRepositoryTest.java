@@ -23,8 +23,8 @@ public class ProductRepositoryTest {
         Product product = new Product();
         product.setProductNm("테스트 상품");
         product.setPrice(10000);
-        product.setItemDetail("테스트 상품 상세 설명");
-        product.setItemSellStatus(ProductSellStatus.SELL);
+        product.setProductDetail("테스트 상품 상세 설명");
+        product.setProductSellStatus(ProductSellStatus.SELL);
         product.setStockNumber(100);
         product.setRegTime(LocalDateTime.now());
         product.setUpdateTime(LocalDateTime.now());
