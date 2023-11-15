@@ -1,6 +1,7 @@
 package com.shop.service;
 
 import com.shop.dto.ProductFormDto;
+import com.shop.dto.ProductImgDto;
 import com.shop.entity.Product;
 import com.shop.entity.ProductImg;
 import com.shop.repository.ProductImgRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +40,36 @@ public class ProductService {
             }
 
             productImgService.saveProductImg(productImg, productImgFileList.get(i));
+        }
+
+        return product.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public ProductFormDto getProductDtl(Long productId) {
+        List<ProductImg> productImgList = productImgRepository.findByProductIdOrderByIdAsc(productId);
+        List<ProductImgDto> productImgDtoLIst = new ArrayList<>();
+        for (ProductImg productImg : productImgList) {
+            ProductImgDto productImgDto = ProductImgDto.of(productImg);
+            productImgDtoLIst.add(productImgDto);
+        }
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(EntityNotFoundException::new);
+        ProductFormDto productFormDto = ProductFormDto.of(product);
+        productFormDto.setProductImgDtoList(productImgDtoLIst);
+        return productFormDto;
+    }
+
+    public Long updateProduct(ProductFormDto productFormDto, List<MultipartFile> productImgFileList) throws Exception {
+
+        Product product = productRepository.findById(productFormDto.getId())
+                .orElseThrow(EntityNotFoundException::new);
+        product.updateProduct(productFormDto);
+        List<Long> productImgIds = productFormDto.getProductImgIds();
+
+        for (int i=0; i<productImgFileList.size(); i++) {
+            productImgService.updateProductImg(productImgIds.get(i), productImgFileList.get(i));
         }
 
         return product.getId();

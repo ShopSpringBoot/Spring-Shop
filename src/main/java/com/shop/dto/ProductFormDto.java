@@ -18,7 +18,7 @@ public class ProductFormDto {
     private Long id;
 
     @NotBlank(message = "상품명을 입력해 주세요.")
-    private String productName;
+    private String productNm;
 
     @NotNull(message = "가격을 입력해 주세요.")
     private Integer price;
@@ -27,7 +27,7 @@ public class ProductFormDto {
     private String productDetail;
 
     @NotNull(message = "재고를 입력해 주세요.")
-    private Integer stockNum;
+    private Integer stockNumber;
 
     private ProductSellStatus productSellStatus;
 

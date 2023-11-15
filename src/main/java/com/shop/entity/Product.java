@@ -1,6 +1,7 @@
 package com.shop.entity;
 
 import com.shop.constant.ProductSellStatus;
+import com.shop.dto.ProductFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -31,12 +32,20 @@ public class Product {
 
     @Lob
     @Column(nullable = false)
-    private String itemDetail;              //상품 상세 설명
+    private String productDetail;              //상품 상세 설명
 
     @Enumerated(EnumType.STRING)
-    private ProductSellStatus itemSellStatus;  //상품 판매 상태
+    private ProductSellStatus productSellStatus;  //상품 판매 상태
 
     private LocalDateTime regTime;          //등록 시간
 
     private LocalDateTime updateTime;       //수정 시간
+
+    public void updateProduct(ProductFormDto productFormDto) {
+        this.productNm = productFormDto.getProductNm();
+        this.price = productFormDto.getPrice();
+        this.stockNumber = productFormDto.getStockNumber();
+        this.productDetail = productFormDto.getProductDetail();
+        this.productSellStatus = productFormDto.getProductSellStatus();
+    }
 }

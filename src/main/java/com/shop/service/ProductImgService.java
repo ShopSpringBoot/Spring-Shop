@@ -36,4 +36,20 @@ public class ProductImgService {
         productImg.updateProductImg(ogImgName, imgName, imgUrl);
         productImgRepository.save(productImg);
     }
+
+    public void updateProductImg(Long productImgId, MultipartFile productImgFile) throws Exception {
+        if (!productImgFile.isEmpty()) {
+            ProductImg savedProductImg = productImgRepository.findById(productImgId)
+                    .orElseThrow(EntityNotFoundException::new);
+
+            if (!StringUtils.isEmpty(savedProductImg.getImgName())) {
+                fileService.deleteFIle(productImgLocation + "/" + savedProductImg.getImgName());
+            }
+
+            String ogImgName = productImgFile.getOriginalFilename();
+            String imgName = fileService.uploadFile(productImgLocation,ogImgName, productImgFile.getBytes());
+            String imgUrl = "/images/product/" + imgName;
+            savedProductImg.updateProductImg(ogImgName, imgName, imgUrl);
+        }
+    }
 }
