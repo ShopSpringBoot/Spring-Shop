@@ -2,11 +2,14 @@ package com.shop.service;
 
 import com.shop.dto.ProductFormDto;
 import com.shop.dto.ProductImgDto;
+import com.shop.dto.ProductSearchDto;
 import com.shop.entity.Product;
 import com.shop.entity.ProductImg;
 import com.shop.repository.ProductImgRepository;
 import com.shop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,5 +76,10 @@ public class ProductService {
         }
 
         return product.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Product> getAdminProductPage(ProductSearchDto productSearchDto, Pageable pageable) {
+        return productRepository.getAdminProductPage(productSearchDto, pageable);
     }
 }

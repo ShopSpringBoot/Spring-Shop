@@ -1,8 +1,13 @@
 package com.shop.controller;
 
 import com.shop.dto.ProductFormDto;
+import com.shop.dto.ProductSearchDto;
+import com.shop.entity.Product;
 import com.shop.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -86,5 +92,19 @@ public class ProductController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping(value = {"/product", "/product/{page}"})
+    public String productMange(ProductSearchDto productSearchDto,
+                               @PathVariable("page")Optional<Integer> page, Model model) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+
+        Page<Product> products = productService.getAdminProductPage(productSearchDto, pageable);
+
+        model.addAttribute("products", products);
+        model.addAttribute("productSearchDto", productSearchDto);
+        model.addAttribute("maxPage", 5);
+
+        return "product/productMng";
     }
 }
