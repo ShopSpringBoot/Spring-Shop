@@ -28,13 +28,13 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping(value = "product/new")
+    @GetMapping(value = "/admin/product/new")
     public String productForm(Model model) {
         model.addAttribute("productFormDto", new ProductFormDto());
         return "product/productForm";
     }
 
-    @PostMapping(value = "product/new")
+    @PostMapping(value = "/admin/product/new")
     public String productNew(@Valid ProductFormDto productFormDto, BindingResult bindingResult,
                              Model model, @RequestParam("productImgFile")List<MultipartFile> productImgFileList) {
         if (bindingResult.hasErrors()) {
@@ -56,7 +56,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "product/{productId}")
+    @GetMapping(value = "/admin/product/{productId}")
     public String productDtl(@PathVariable("productId") Long productId, Model model) {
 
         try {
@@ -71,7 +71,7 @@ public class ProductController {
         return "product/productForm";
     }
 
-    @PostMapping(value = "/product/{productId}")
+    @PostMapping(value = "/admin/product/{productId}")
     public String productUpdate(@Valid ProductFormDto productFormDto, BindingResult bindingResult, Model model,
                                 @RequestParam("productImgFile") List<MultipartFile> productImgFileList) {
 
@@ -94,7 +94,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping(value = {"/product", "/product/{page}"})
+    @GetMapping(value = {"/admin/products", "/admin/products/{page}"})
     public String productMange(ProductSearchDto productSearchDto,
                                @PathVariable("page")Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
@@ -106,5 +106,12 @@ public class ProductController {
         model.addAttribute("maxPage", 5);
 
         return "product/productMng";
+    }
+
+    @GetMapping(value = "/product/{productId}")
+    public String productDtl(Model model, @PathVariable("productId") Long productId){
+        ProductFormDto productFormDto = productService.getProductDtl(productId);
+        model.addAttribute("product", productFormDto);
+        return "product/productDtl";
     }
 }
