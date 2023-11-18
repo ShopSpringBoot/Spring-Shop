@@ -43,7 +43,8 @@ public class Member {
         // BCryptPasswordEncoder Bean을 파라미터로 넘겨 비밀번호 암호화
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.USER);
+        // Member 엔터티 생성 시 권한 User Role -> ADMIN Role 수정
+        member.setRole(Role.ADMIN);
         return member;
     }
 }
