@@ -1,6 +1,5 @@
 package com.shop.entity;
 
-
 import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import lombok.Getter;
@@ -15,6 +14,7 @@ import javax.persistence.*;
 @Getter @Setter
 @ToString
 public class Member {
+
     @Id
     @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
