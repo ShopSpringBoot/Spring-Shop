@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Product {
+public class Product extends BaseEntity {
 
     @Id
     @Column(name="product_id")

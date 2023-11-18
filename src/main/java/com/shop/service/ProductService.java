@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.dto.MainProductDto;
 import com.shop.dto.ProductFormDto;
 import com.shop.dto.ProductImgDto;
 import com.shop.dto.ProductSearchDto;
@@ -24,7 +25,9 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+
     private final ProductImgService productImgService;
+
     private final ProductImgRepository productImgRepository;
 
     public Long saveProduct(ProductFormDto productFormDto, List<MultipartFile> productImgFileList) throws Exception {
@@ -81,5 +84,10 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Page<Product> getAdminProductPage(ProductSearchDto productSearchDto, Pageable pageable) {
         return productRepository.getAdminProductPage(productSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainProductDto> getMainProductPage(ProductSearchDto productSearchDto, Pageable pageable){
+        return productRepository.getMainProductPage(productSearchDto, pageable);
     }
 }
