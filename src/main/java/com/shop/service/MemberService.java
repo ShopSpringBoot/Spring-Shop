@@ -5,7 +5,6 @@ import com.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-// import javax.transaction.Transactional; 자동완성 되었는데 뭐 사용할 지 고민 중
 
 @Service
 // 로직 처리 중 에러 발생 시 로직을 수행하기 이전 상태로 콜백
