@@ -3,6 +3,10 @@ package com.shop.service;
 import com.shop.entity.Member;
 import com.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 // final이나 @NonNull이 붙은 필드에 생성자 생성
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService implements UserDetailsService {
     // 빈에 생성자가 1개이고, 파라미터 타입이 빈으로 등록 가능 시 @Autowired 없이 의존성 주입 가능
     private final MemberRepository memberRepository;
 
@@ -26,5 +30,20 @@ public class MemberService {
         if (findMember != null) {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Member member = memberRepository.findByEmail(email);
+
+        if(member == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        return User.builder()
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
     }
 }
