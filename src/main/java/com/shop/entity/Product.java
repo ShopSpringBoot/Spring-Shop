@@ -2,12 +2,12 @@ package com.shop.entity;
 
 import com.shop.constant.ProductSellStatus;
 import com.shop.dto.ProductFormDto;
+import com.shop.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="product")
@@ -37,15 +37,23 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductSellStatus productSellStatus;  //상품 판매 상태
 
-    private LocalDateTime regTime;          //등록 시간
-
-    private LocalDateTime updateTime;       //수정 시간
-
-    public void updateProduct(ProductFormDto productFormDto) {
+    public void updateProduct(ProductFormDto productFormDto){
         this.productNm = productFormDto.getProductNm();
         this.price = productFormDto.getPrice();
         this.stockNumber = productFormDto.getStockNumber();
         this.productDetail = productFormDto.getProductDetail();
         this.productSellStatus = productFormDto.getProductSellStatus();
+    }
+
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
+
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
     }
 }
