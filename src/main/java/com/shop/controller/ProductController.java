@@ -36,7 +36,7 @@ public class ProductController {
 
     @PostMapping(value = "/admin/product/new")
     public String productNew(@Valid ProductFormDto productFormDto, BindingResult bindingResult,
-                             Model model, @RequestParam("productImgFile")List<MultipartFile> productImgFileList) {
+                             Model model, @RequestParam("productImgFile") List<MultipartFile> productImgFileList) {
         if (bindingResult.hasErrors()) {
             return "product/productForm";
         }
@@ -49,7 +49,7 @@ public class ProductController {
         try {
             productService.saveProduct(productFormDto, productImgFileList);
         } catch (Exception e) {
-            model.addAttribute("erroeMessage", "상품 등록 중 에러가 발생하였습니다.");
+            model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
             return "product/productForm";
         }
 
@@ -87,7 +87,7 @@ public class ProductController {
         try {
             productService.saveProduct(productFormDto, productImgFileList);
         } catch (Exception e) {
-            model.addAttribute("erroeMessage", "상품 수정 중 에러가 발생하였습니다.");
+            model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "product/productForm";
         }
 

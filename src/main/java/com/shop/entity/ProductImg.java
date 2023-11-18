@@ -7,9 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="product_img")
-@Getter
-@Setter
-public class ProductImg {
+@Getter @Setter
+public class ProductImg extends BaseEntity {
 
     @Id
     @Column(name="product_img_id")
