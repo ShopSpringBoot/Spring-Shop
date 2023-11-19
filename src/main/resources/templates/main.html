@@ -6,7 +6,7 @@
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
-        .carousel-inner > .product {
+        .carousel-inner > .item {
             height: 350px;
         }
         .margin{
@@ -36,27 +36,27 @@
 
     <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-product active product">
+            <div class="carousel-item active item">
                 <img class="d-block w-100 banner" src="https://user-images.githubusercontent.com/13268420/112147492-1ab76200-8c20-11eb-8649-3d2f282c3c02.png" alt="First slide">
             </div>
         </div>
     </div>
 
-    <input type="hidden" name="searchQuery" th:value="${productSearchDto.searchQuery}">
-    <div th:if="${not #strings.isEmpty(productSearchDto.searchQuery)}" class="center">
-        <p class="h3 font-weight-bold" th:text="${productSearchDto.searchQuery} + '검색 결과'"></p>
+    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
     </div>
 
     <div class="row">
-        <th:block th:each="product, status: ${products.getContent()}">
+        <th:block th:each="item, status: ${items.getContent()}">
             <div class="col-md-4 margin">
                 <div class="card">
-                    <a th:href="'/product/' +${product.id}" class="text-dark">
-                        <img th:src="${product.imgUrl}" class="card-img-top" th:alt="${product.productNm}" height="400">
+                    <a th:href="'/item/' +${item.id}" class="text-dark">
+                        <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" height="400">
                         <div class="card-body">
-                            <h4 class="card-title">[[${product.productNm}]]</h4>
-                            <p class="card-text">[[${product.productDetail}]]</p>
-                            <h3 class="card-title text-danger">[[${product.price}]]원</h3>
+                            <h4 class="card-title">[[${item.itemNm}]]</h4>
+                            <p class="card-text">[[${item.itemDetail}]]</p>
+                            <h3 class="card-title text-danger">[[${item.price}]]원</h3>
                         </div>
                     </a>
                 </div>
@@ -64,25 +64,26 @@
         </th:block>
     </div>
 
-    <div th:with="start=${(products.number/maxPage)*maxPage + 1}, end=(${(products.totalPages == 0) ? 1 : (start + (maxPage - 1) < products.totalPages ? start + (maxPage - 1) : products.totalPages)})" >
+    <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
         <ul class="pagination justify-content-center">
 
-            <li class="page-product" th:classappend="${products.number eq 0}?'disabled':''">
-                <a th:href="@{'/' + '?searchQuery=' + ${productSearchDto.searchQuery} + '&page=' + ${products.number-1}}" aria-label='Previous' class="page-link">
+            <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
                     <span aria-hidden='true'>Previous</span>
                 </a>
             </li>
 
-            <li class="page-product" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${products.number eq page-1}?'active':''">
-                <a th:href="@{'/' +'?searchQuery=' + ${productSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
             </li>
 
-            <li class="page-product" th:classappend="${products.number+1 ge products.totalPages}?'disabled':''">
-                <a th:href="@{'/' +'?searchQuery=' + ${productSearchDto.searchQuery} + '&page=' + ${products.number+1}}" aria-label='Next' class="page-link">
+            <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
                     <span aria-hidden='true'>Next</span>
                 </a>
             </li>
 
         </ul>
     </div>
+
 </div>
