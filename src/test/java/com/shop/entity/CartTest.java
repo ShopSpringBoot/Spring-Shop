@@ -3,7 +3,6 @@ package com.shop.entity;
 import com.shop.dto.MemberFormDto;
 import com.shop.repository.CartRepository;
 import com.shop.repository.MemberRepository;
-import groovy.transform.ASTTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 @TestPropertySource(locations="classpath:application-test.properties")
 
-public class CartTest {
+class CartTest {
 
     @Autowired
     CartRepository cartRepository;
@@ -36,20 +35,20 @@ public class CartTest {
     @PersistenceContext
     EntityManager em;
 
-    public Member creatMember() {
+    public Member createMember(){
         MemberFormDto memberFormDto = new MemberFormDto();
-        memberFormDto.setEmail("test@gamil.com");
+        memberFormDto.setEmail("test@email.com");
+        memberFormDto.setName("홍길동");
         memberFormDto.setAddress("서울시 마포구 합정동");
         memberFormDto.setPassword("1234");
         return Member.createMember(memberFormDto, passwordEncoder);
     }
 
     @Test
-    @DisplayName("장바구나 회원 엔티티 매핑 조회 테스트")
-    public void findCartAndMemberTest() {
-        Member memeber = creatMember();
+    @DisplayName("장바구니 회원 엔티티 매핑 조회 테스트")
+    public void findCartAndMemberTest(){
+        Member member = createMember();
         memberRepository.save(member);
-
         Cart cart = new Cart();
         cart.setMember(member);
         cartRepository.save(cart);
