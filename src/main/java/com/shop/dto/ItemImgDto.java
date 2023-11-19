@@ -1,26 +1,27 @@
 package com.shop.dto;
 
-import com.shop.entity.ProductImg;
+import com.shop.entity.ItemImg;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
 @Getter @Setter
-public class ProductImgDto {
+public class ItemImgDto {
 
     private Long id;
 
     private String imgName;
 
-    private String ogImgName;
+    private String oriImgName;
 
     private String imgUrl;
 
-    private String isThumbnail;
+    private String repImgYn;
 
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public static ProductImgDto of(ProductImg productImg) {
-        return modelMapper.map(productImg, ProductImgDto.class);
+    public static ItemImgDto of(ItemImg itemImg) {
+        return modelMapper.map(itemImg,ItemImgDto.class);
     }
+
 }

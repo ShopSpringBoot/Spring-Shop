@@ -5,24 +5,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class MainProductDto {
+public class MainItemDto {
 
     private Long id;
 
-    private String productNm;
+    private String itemNm;
 
-    private String productDetail;
+    private String itemDetail;
 
     private String imgUrl;
 
     private Integer price;
 
     @QueryProjection
-    public MainProductDto(Long id, String productNm, String productDetail, String imgUrl, Integer price) {
+    public MainItemDto(Long id, String itemNm, String itemDetail, String imgUrl,Integer price){
         this.id = id;
-        this.productNm = productNm;
-        this.productDetail = productDetail;
+        this.itemNm = itemNm;
+        this.itemDetail = itemDetail;
         this.imgUrl = imgUrl;
         this.price = price;
     }
+
 }
