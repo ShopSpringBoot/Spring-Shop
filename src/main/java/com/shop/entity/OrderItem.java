@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 
 public class OrderItem {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "item_id")
     private Item item;
 
@@ -26,8 +27,4 @@ public class OrderItem {
     private int orderPrice; // 주문 가격
 
     private int count; // 수량
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
 }
