@@ -1,11 +1,11 @@
 package com.shop.controller;
 
+import com.shop.dto.ProductDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shop.dto.ItemDto;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
@@ -23,53 +23,53 @@ public class ThymeleafExController {
 
     @GetMapping(value = "/ex02")
     public String thymeleafExample02(Model model){
-        ItemDto itemDto = new ItemDto();
-        itemDto.setItemDetail("상품 상세 설명");
-        itemDto.setItemNm("테스트 상품1");
-        itemDto.setPrice(10000);
-        itemDto.setRegTime(LocalDateTime.now());
+        ProductDto productDto = new ProductDto();
+        productDto.setProductDetail("상품 상세 설명");
+        productDto.setProductNm("테스트 상품1");
+        productDto.setPrice(10000);
+        productDto.setRegTime(LocalDateTime.now());
 
-        model.addAttribute("itemDto", itemDto);
+        model.addAttribute("productDto", productDto);
         return "thymeleafEx/thymeleafEx02";
     }
 
     @GetMapping(value = "/ex03")
     public String thymeleafExample03(Model model){
 
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<ProductDto> productDtoList = new ArrayList<>();
 
         for(int i=1;i<=10;i++){
 
-            ItemDto itemDto = new ItemDto();
-            itemDto.setItemDetail("상품 상세 설명"+i);
-            itemDto.setItemNm("테스트 상품" + i);
-            itemDto.setPrice(1000*i);
-            itemDto.setRegTime(LocalDateTime.now());
+            ProductDto productDto = new ProductDto();
+            productDto.setProductDetail("상품 상세 설명"+i);
+            productDto.setProductNm("테스트 상품" + i);
+            productDto.setPrice(1000*i);
+            productDto.setRegTime(LocalDateTime.now());
 
-            itemDtoList.add(itemDto);
+            productDtoList.add(productDto);
         }
 
-        model.addAttribute("itemDtoList", itemDtoList);
+        model.addAttribute("productDtoList", productDtoList);
         return "thymeleafEx/thymeleafEx03";
     }
 
     @GetMapping(value = "/ex04")
     public String thymeleafExample04(Model model){
 
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<ProductDto> productDtoList = new ArrayList<>();
 
         for(int i=1;i<=10;i++){
 
-            ItemDto itemDto = new ItemDto();
-            itemDto.setItemDetail("상품 상세 설명"+i);
-            itemDto.setItemNm("테스트 상품" + i);
-            itemDto.setPrice(1000*i);
-            itemDto.setRegTime(LocalDateTime.now());
+            ProductDto productDto = new ProductDto();
+            productDto.setProductDetail("상품 상세 설명"+i);
+            productDto.setProductNm("테스트 상품" + i);
+            productDto.setPrice(1000*i);
+            productDto.setRegTime(LocalDateTime.now());
 
-            itemDtoList.add(itemDto);
+            productDtoList.add(productDto);
         }
 
-        model.addAttribute("itemDtoList", itemDtoList);
+        model.addAttribute("productDtoList", productDtoList);
         return "thymeleafEx/thymeleafEx04";
     }
 

@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class ItemDto {
+public class ProductDto {
 
     private Long id;
 
-    private String itemNm;
+    private String productNm;
 
     private Integer price;
 
-    private String itemDetail;
+    private String productDetail;
 
     private String sellStatCd;
 
