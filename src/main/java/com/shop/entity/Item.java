@@ -4,6 +4,7 @@ import com.shop.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import java.util.List;
 
 import javax.persistence.*;
 import com.shop.dto.ItemFormDto;
@@ -17,14 +18,14 @@ import com.shop.exception.OutOfStockException;
 public class Item extends BaseEntity {
 
     @Id
-    @Column(name="item_id")
+    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;       //상품 코드
 
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
 
-    @Column(name="price", nullable = false)
+    @Column(name = "price", nullable = false)
     private int price; //가격
 
     @Column(nullable = false)
@@ -36,6 +37,14 @@ public class Item extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; //상품 판매 상태
+
+    @ManyToMany
+    @JoinTable(
+            name = "member_item",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
+    private List<Member> member;
 
     public void updateItem(ItemFormDto itemFormDto){
         this.itemNm = itemFormDto.getItemNm();
