@@ -14,13 +14,16 @@
     <script th:inline="javascript">
 
         $(document).ready(function(){
+            // 주문할 상품을 체크하거나 해제할 경우 총 주문 금액을 구하는 함수 호출
             $("input[name=cartChkBox]").change( function(){
                 getOrderTotalPrice();
             });
         });
 
         function getOrderTotalPrice(){
+            // 총 주문 금액을 구하는 함수
             var orderTotalPrice = 0;
+            // 현재 체크된 장바구니 상품들의 가격과 수량을 곱해서 총 주문 금액 계산
             $("input[name=cartChkBox]:checked").each(function() {
                 var cartItemId = $(this).val();
                 var price = $("#price_" + cartItemId).attr("data-price");
@@ -31,6 +34,7 @@
             $("#orderTotalPrice").html(orderTotalPrice+'원');
         }
 
+        // 장바구니의 상품 수량 변경 시 상품 금액 변경 후 getOrderTotalPrice()함수 호출
         function changeCount(obj){
             var count = obj.value;
             var cartItemId = obj.id.split('_')[1];
@@ -41,6 +45,7 @@
             updateCartItemCount(cartItemId, count);
         }
 
+        // 장바구니에 들어있는 전체 상품을 체크하거나 체크 해제하는 함수, getOrderTotalPrice()함수 호출
         function checkAll(){
             if($("#checkall").prop("checked")){
                 $("input[name=cartChkBox]").prop("checked",true);
