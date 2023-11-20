@@ -26,4 +26,8 @@ public class OrderItem extends BaseEntity {
     private int orderPrice; // 주문 가격
 
     private int count; // 수량
+
+    public void cancel() {
+        this.getItem().addStock(count);
+    }
 }
