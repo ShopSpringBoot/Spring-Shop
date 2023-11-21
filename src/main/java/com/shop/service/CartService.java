@@ -18,8 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
+
+import com.shop.dto.CartDetailDto;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.thymeleaf.util.StringUtils;
+import com.shop.dto.CartOrderDto;
+import com.shop.dto.OrderDto;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +36,12 @@ public class CartService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final OrderService orderService;
 
     public Long addCart(CartItemDto cartItemDto, String email) {
         Item item = itemRepository.findById(cartItemDto.getItemId())
                 .orElseThrow(EntityNotFoundException::new);
-        Member member = memberRepository.findByEmail();
+        Member member = memberRepository.findByEmail(email);
 
         Cart cart = cartRepository.findByMemberId(member.getId());
         if (cart == null) {
@@ -51,8 +58,7 @@ public class CartService {
             cartItemRepository.save(cartItem);
             return cartItem.getId();
         }
-  
-    private final OrderService orderService;
+    }
 
     @Transactional(readOnly = true)
     public List<CartDetailDto> getCartList(String email) {
@@ -72,6 +78,7 @@ public class CartService {
         return cartDetailDtoList;
     }
 
+    @Transactional(readOnly = true)
     public boolean validateCartItem(Long cartItemId, String email) {
         // 현재 로그인한 회원 조회
         Member curMember = memberRepository.findByEmail(email);
