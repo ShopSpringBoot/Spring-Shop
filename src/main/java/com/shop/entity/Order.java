@@ -55,10 +55,7 @@ public class Order extends BaseEntity {
             totalPrice += orderItem.getTotalPrice();
         }
         return totalPrice;
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
+    }
 
     public void cancelOrder() {
         this.orderStatus = OrderStatus.CANCEL;
