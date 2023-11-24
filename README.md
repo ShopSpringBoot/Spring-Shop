@@ -1,4 +1,4 @@
-# ShopSpringBoot
+# Spring-Shop
 
 -------------------------------------------------------
 ## Proceedings
