@@ -1,7 +1,7 @@
 # Spring-Shop
 
 -------------------------------------------------------
-## Proceedings
+## 회의록
 11/1 ~ 11/4 : Settings <br>
 11/4 ~ 11/7 : <br>
 - ljt528 : SignUp/SignIn/SignOut
