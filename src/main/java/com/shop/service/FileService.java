@@ -5,10 +5,14 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Value;
 
 @Service
 @Log
 public class FileService {
+
+    @Value("${uploadPath}")
+    private String uploadPath;
 
     public String uploadFile(String uploadPath, String originalFileName, byte[] fileData) throws Exception{
         UUID uuid = UUID.randomUUID();
