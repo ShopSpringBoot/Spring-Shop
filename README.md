@@ -9,7 +9,7 @@
 - nohheeyeon : Cart
 
 ~11/21 : <br>
-- ljt528 : SignUp/SignIn/SignOut Completed
+- ljt528 : SignUp/SignIn/SignOut, Order Completed
 - xkimido : Product, Order Completed
 - nohheeyeon : Cart, Order Completed
 
