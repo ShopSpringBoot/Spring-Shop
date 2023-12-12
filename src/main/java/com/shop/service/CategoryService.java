@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.groupingBy;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class CategoryService {
         Map<Long, List<CategoryDto>> groupingByParent = categoryRepository.findAll()
                 .stream()
                 .map(ce -> new CategoryDto(ce.getCategoryId(), ce.getCategoryName(), ce.getParentId()))
-                .collect(groupingBy(cd -> cd.getParentId()));
+                .collect(groupingBy(CategoryDto::getParentId));
 
         CategoryDto rootCategoryDto = new CategoryDto(0l, "ROOT", null);
         addSubCategories(rootCategoryDto, groupingByParent);
@@ -34,7 +36,7 @@ public class CategoryService {
         if (subCategories == null)
             return;
 
-        parent.setSubCategories(subCategories);
+        parent.setSubCategory(subCategories);
 
         subCategories.stream()
                 .forEach(s -> {
