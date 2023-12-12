@@ -94,6 +94,14 @@
 
         <div class="input-group">
             <div class="input-group-prepend">
+                <span class="input-group-text">카테고리</span>
+            </div>
+            <input type="number" th:field="*{categoryId}" class="form-control" placeholder="상품의 카테고리를 입력해주세요">
+        </div>
+        <p th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" class="fieldError">Incorrect data</p>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
                 <span class="input-group-text">상품 상세 내용</span>
             </div>
             <textarea class="form-control" aria-label="With textarea" th:field="*{itemDetail}"></textarea>
