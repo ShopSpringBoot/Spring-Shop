@@ -87,6 +87,10 @@ public class ItemService {
         return item.getId();
     }
 
+    public void deleteItem(Long id) {
+        itemRepository.deleteById(id);
+    }
+
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
