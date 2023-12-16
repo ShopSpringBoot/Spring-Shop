@@ -16,6 +16,9 @@
 11/21 : <br>
 - Spring Boot Project Successfully Launched and Merged into Main Branch
   <img width="715" alt="image" src="https://github.com/ShopSpringBoot/Spring-Shop/assets/130336617/223ab923-e398-4bd3-844b-104cf5475e70">
+
+~ 12/17 : <br>
+- nohheeyeon : Spring Boot & React
 ---------------
 ## 변수명
 
