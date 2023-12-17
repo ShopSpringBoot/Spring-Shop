@@ -87,8 +87,9 @@ public class ItemService {
         return item.getId();
     }
 
-    public void deleteItem(Long id) {
-        itemRepository.deleteById(id);
+    @Transactional
+    public void deleteItem(Long itemId) {
+        itemRepository.deleteById(itemId);
     }
 
     @Transactional(readOnly = true)

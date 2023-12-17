@@ -1,22 +1,19 @@
 package com.shop.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
 import com.shop.dto.ItemFormDto;
 
 import com.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.EntityNotFoundException;
 
 import com.shop.dto.ItemSearchDto;
@@ -98,14 +95,9 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/{itemId}")
-    public String deleteItem(@PathVariable Long itemId, Model model) {
-        try {
-            itemService.deleteItem(itemId);
-        } catch (Exception e){
-            model.addAttribute("errorMessage", "상품 삭제 중 에러가 발생하였습니다.");
-            return "item/itemMng";
-        }
+    @DeleteMapping(value = "/admin/item/{itemId}")
+    public String deleteItem(@PathVariable Long itemId) {
+        itemService.deleteItem(itemId);
         return "item/itemMng";
     }
 
