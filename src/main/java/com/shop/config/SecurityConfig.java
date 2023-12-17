@@ -10,6 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +26,14 @@ public class SecurityConfig {
     @Bean
     // 페이지 권한 설정, 로그인 페이지 설정, 로그아웃 메소드 등 설정 작성
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // 리액트 앱의 URL
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("*"));
+        source.registerCorsConfiguration("/**", config);
+        http.cors().configurationSource(source);
         http.formLogin()
                 // 로그인 페이지 URL 설정
                 .loginPage("/members/login")
@@ -41,7 +53,7 @@ public class SecurityConfig {
 
         // 시큐리티 처리에 HttpServletRequest 이용
         http.authorizeRequests()
-                .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .mvcMatchers("/css/**", "/js/**", "/img/**", "/api/hello").permitAll()
                 //모든 사용자가 인증없이 해당 경로 접근 설정
                 .mvcMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
                 // /admin시작 경로는 ADMIN Role일때 접근 가능
