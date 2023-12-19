@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import com.shop.dto.CommentDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,7 +22,14 @@ public class Comment extends BaseEntity{
     @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private String author;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
+
+    public void updateCommnet(CommentDto commentDto) {
+        this.content = commentDto.getContent();
+    }
 }
