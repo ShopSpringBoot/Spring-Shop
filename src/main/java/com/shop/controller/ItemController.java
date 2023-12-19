@@ -95,10 +95,10 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @DeleteMapping(value = "/admin/item/{itemId}")
+    @PostMapping(value = "/delete/item/{itemId}")
     public String deleteItem(@PathVariable Long itemId) {
         itemService.deleteItem(itemId);
-        return "item/itemMng";
+        return "redirect:/admin/items";
     }
 
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
