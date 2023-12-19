@@ -18,7 +18,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public Long saveComment(CommentFormDto commentFormDto) throws Exception {
+    public Long saveComment(CommentFormDto commentFormDto, Item item) throws Exception {
         Comment comment = commentFormDto.addComment();
         commentRepository.save(comment);
 
@@ -30,10 +30,8 @@ public class CommentService {
         return commentRepository.findByItem(item);
     }
 
-    public Long updateComment(CommentFormDto commentFormDto) throws Exception {
-        Comment comment = commentRepository.findById(commentFormDto.getId())
-                .orElseThrow(EntityNotFoundException::new);
-        comment.updateCommnet(commentFormDto);
+    public Long updateComment(CommentFormDto commentFormDto, Comment comment) throws Exception {
+        commentRepository.save(comment);
 
         return comment.getId();
     }
