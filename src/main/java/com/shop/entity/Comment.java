@@ -19,7 +19,7 @@ public class Comment extends BaseEntity{
     private Long id;
 
     @Column(nullable = false)
-    private String comment;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
