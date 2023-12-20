@@ -196,6 +196,35 @@
         <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
     </div>
 
+    <!-- 댓글 작성 폼 -->
+    <div class="container">
+        <h4 class="display-5">댓글 작성</h4>
+        <form th:action="@{/comments/{itemId}/add(item=${item.id})}" method="post">
+            <input type="hidden" id="itemId" th:value="${item.id}">
+            <div class="form-group">
+                <textarea class="form-control" id="comment" name="content" rows="3" placeholder="댓글을 작성하세요"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">댓글 작성</button>
+        </form>
+    </div>
+
+    <!-- 댓글 목록 -->
+    <div class="container mt-5">
+        <h4 class="display-5">댓글 목록</h4>
+        <div th:if="${comments}">
+            <div th:each="comment : ${comments}">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p th:text="${comment.content}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${comments}">
+            <p>댓글이 없습니다.</p>
+        </div>
+    </div>
+
 </div>
 
 </html>
