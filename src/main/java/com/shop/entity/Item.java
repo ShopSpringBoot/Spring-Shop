@@ -39,10 +39,10 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; //상품 판매 상태
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ItemImg> itemImg;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Comment> comment;
 
     public void updateItem(ItemFormDto itemFormDto){
