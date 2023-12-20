@@ -29,7 +29,7 @@ public class Comment extends BaseEntity{
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    public void updateCommnet(CommentFormDto commentDto) {
+    public void updateComment(CommentFormDto commentDto) {
         this.content = commentDto.getContent();
     }
 }
