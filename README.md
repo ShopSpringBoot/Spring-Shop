@@ -16,6 +16,9 @@
 11/21 : <br>
 - Spring Boot Project Successfully Launched and Merged into Main Branch
   <img width="715" alt="image" src="https://github.com/ShopSpringBoot/Spring-Shop/assets/130336617/223ab923-e398-4bd3-844b-104cf5475e70">
+
+~ 12/17 : <br>
+- nohheeyeon : Spring Boot & React
 ---------------
 ## 변수명
 
@@ -115,6 +118,8 @@
 
 8. 메인 페이지(Main Page):
     - 웹사이트 내에서 메인 페이지 구현
+    - 상품 리스트
+    - 추천 상품 리스트
 
 9. 댓글 (Comment):
     - 댓글 등록, 수정, 삭제
@@ -123,10 +128,17 @@
 10. 프로필(Profile):
 - 사용자 프로필 설정기능
 
+11. 관리자(Admin)
+
 ### DB 연결
 - MySQL 데이터베이스 사용 : 프로젝트의 백엔드 데이터 저장소로 MySQL 데이터베이스를 사용
 
 ### 추가 기능 및 기술
+
+```
+Node.js : v18.17.1
+React : 10.2.5 
+```
 
 ##### 사용자 중심 기능:
 1. 고급 검색 및 필터링 기능
